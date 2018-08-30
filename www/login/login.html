@@ -109,7 +109,7 @@ if(localStorage.getItem("Code") != null ){
   
 
     $scope.Login = function () {
-	
+	 window.location.href = "../index2.html";
   $scope.error = "Wait ...";  
         http = localStorage.getItem("serverpath")+"data.php?Code=logincheck&username="+$scope.username+"&password="+$scope.password+"&ip="+localStorage.getItem("Ip")+"&location="+localStorage.getItem("Location");
         //the REST service Server to fetch the day stock 
