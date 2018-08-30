@@ -1,0 +1,74 @@
+ <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+ <nav id="sidebar" style="background:-webkit-linear-gradient(top, #71af0d, #8fa400);">
+                <div class="sidebar-header text-center"  style="background:-webkit-linear-gradient(top, #679c12, #4b9607);">
+                    <table class="table " style="border-width: 0px;">
+                        <tr>
+                            <td rowspan="3">
+                                <img src="img/logo.png" width="50px">
+                            </td>
+                        </tr>
+                        <tr class="pull-left">
+                            <td><i class="fa fa-user"></i> &nbsp; <label id="lblName"></label></td>
+                        </tr>
+                        <tr class="pull-left">
+                            <td><i class="fa fa-phone"></i> &nbsp; <label id="lblPhone"></label></td>
+                        </tr>
+                    </table>
+                 <!--    <img src="img/logo.png" width="50%" > -->
+                </div>
+
+                <ul class="list-unstyled components" style="border-bottom: 0px solid #47748b; ">
+                    <!-- <p>Dummy Heading</p> -->
+                   <!--  <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                                 <li><a href="index6.html">Index6</a></li>
+                            <li><a href="index2.html">Index2</a></li>
+                            <li><a href="index3.html">Index3</a></li>
+                            <li><a href="index4.html">Index4</a></li>
+                            <li><a href="index5.html">Index5</a></li>
+                        </ul>
+                    </li> -->
+                    <li>
+                        <a href="#"><i class="fa fa-gamepad"></i> &nbsp;&nbsp; New Game</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-money"></i> &nbsp;&nbsp; My Wallet</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-history"></i> &nbsp;&nbsp; Game History</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> &nbsp;&nbsp; Refer & Earn</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-question-circle-o"></i> &nbsp;&nbsp; FAQs</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-wpforms"></i> &nbsp;&nbsp; Terms & Conditions</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-phone"></i> &nbsp;&nbsp; Support</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-star"></i> &nbsp;&nbsp; Rate Us</a>
+                    </li>
+                    <li>
+                        <a href="#" ng-click="Logout()"><i class="fa fa-power-off"></i> &nbsp;&nbsp; LogOut</a>
+                    </li>
+                </ul>
+
+            
+            </nav>
+
+            <script type="text/javascript">
+                $(".table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th").css("border-top","0px solid #ddd");
+
+               document.getElementById("lblName").innerText = localStorage.getItem("Name");
+               document.getElementById("lblPhone").innerText = localStorage.getItem("Phone");
+               
+                if(localStorage.getItem("Code") == undefined ){
+
+                        window.location.href = "login/login.html";
+                    }
+            </script>

@@ -26,19 +26,12 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-<script type="text/javascript">
-if(localStorage.getItem("Code") != null ){
-
-  window.location.href = "../index2.html";
-}
-</script>
 </head>
 <body style="background: -webkit-linear-gradient(top, #b8fc4a, #8fa400);">
 	
-		<div ng-app="myApp"  ng-controller="LoginCtrl">
-	<div class="limiter" >
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');padding: 0px;min-height: 0px;" >
-			<div class="wrap-login100" style="background: -webkit-linear-gradient(top, #b8fc4a, #8fa400);border-radius: 0px;">
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');padding: 0px;min-height: 0px;">
+			<div class="wrap-login100" style="background: -webkit-linear-gradient(top, #b8fc4a, #8fa400);">
 				<form class="login100-form validate-form">
 					<span class="login100-form-logo">
 						<img src="../img/logo.png" width="80px">
@@ -49,29 +42,41 @@ if(localStorage.getItem("Code") != null ){
 						Log in
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter Email / Phone">
-						<input class="input100" type="text" name="username" placeholder="Email / Phone" ng-model="username">
+					<div class="wrap-input100 validate-input" data-validate = "Enter Full Name">
+						<input class="input100" type="text" name="username" placeholder="Full Name">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter Email ID">
+						<input class="input100" type="text" name="username" placeholder="Email ID">
 						<span class="focus-input100" data-placeholder="&#64;"></span>
 					</div>
 
+						<div class="wrap-input100 validate-input" data-validate = "Enter Mobile">
+						<input class="input100" type="text" name="username" placeholder="Mobile No">
+						<span class="focus-input100" data-placeholder="&#9990;"></span>
+					</div>
+
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password" ng-model="password">
+						<input class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
+						<div class="wrap-input100 validate-input" data-validate = "Enter Confirm Password">
+						<input class="input100" type="text" name="username" placeholder="Confirm Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" ng-click="Login()" style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);">
-							Login
+						<button class="login100-form-btn">
+							Sign Up
 						</button>
-						
 					</div>
-<br>
-						<span style="color: white;">{{error}}</span>
-					<div class="text-center p-t-90">
-						<a class="txt1" href="#">Forgot Password?</a>
-						<a class="txt1" href="registration.html"> / Sign Up</a>
+
+						<div class="text-center p-t-10">
+						<a class="txt1" href="login.html">Already have an account ? Login Here</a>
 					</div>
+
 					<div style="min-height: 60px;">
 						
 					</div>
@@ -82,75 +87,10 @@ if(localStorage.getItem("Code") != null ){
 	
 
 	<div id="dropDownSelect1"></div>
-	</div>
+	
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="js/angular.min.js"></script>
-
-<script>
-	var app = angular.module('myApp', []);
-	app.controller('LoginCtrl', function ($scope, $http) {
-
-
- if(localStorage.getItem("Ip") == null)
- {
-
-    $http.get("http://api.ipstack.com/123.136.233.107?access_key=2dfe096702cd6ad09b9df8d9a15eaa3e&format=1").then(function (response) 
-        {
-            // $scope.ip = response.data.ip;
-           
-            localStorage.setItem("Ip",response.data.ip);
-         //  sessionStorage.setItem("Location",response.data.city+' | '+response.data.region);
-             localStorage.setItem("Location",response.data.city+' | '+response.data.region_name);
-            
-        });
- } 
-  
-
-    $scope.Login = function () {
-	
-  $scope.error = "Wait ...";  
-        http = localStorage.getItem("serverpath")+"data.php?Code=logincheck&username="+$scope.username+"&password="+$scope.password+"&ip="+localStorage.getItem("Ip")+"&location="+localStorage.getItem("Location");
-        //the REST service Server to fetch the day stock 
-
-        $http.get(http)
-            .then(function (response) { 
-            	if(response.data.d[0].Code != 0)
-            	{
-	                if(response.data.d[0].IsDeactive == 0)
-	                {
-	                   localStorage.setItem("Code",response.data.d[0].Code);
-	                   localStorage.setItem("Name",response.data.d[0].FullName);
-	                   localStorage.setItem("Phone",response.data.d[0].Phone);
-	                   window.location.href = "../index2.html";
-	       //           if(response.data.d[0].IsVerified == 0)
-	       //           {
-	              // window.location.href = "Verify.html";
-	       //           }
-	       //           else{
-	       //           localStorage.setItem("Code",response.data.d[0].Code);
-	       //           localStorage.setItem("IsVerified",response.data.d[0].IsVerified);
-	       //           window.location.href = "Home.html";
-	       //           }
-	                }
-	                else
-	                {
-	                   $scope.error = "Your account has been deactivated. For activation , please send and email to cliplucky7@gmail.com.";
-	                }
-               
-            		
-            	}else{
-            				$scope.error = response.data.d[0].Msg;
-            		}
-            });
-
-          
-    }
-    
-});
-
-</script>
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
@@ -164,8 +104,6 @@ if(localStorage.getItem("Code") != null ){
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-<script type="text/javascript">
-	$(".container-login100::before").css("background-color","rgb(145, 168, 3) !important");
-</script>
+
 </body>
 </html>
