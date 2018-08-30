@@ -109,6 +109,11 @@ if(localStorage.getItem("Code") != null ){
   
 
     $scope.Login = function () {
+    	
+    	localStorage.setItem("Code",1);
+	                   localStorage.setItem("Name","Admin Singh");
+	                   localStorage.setItem("Phone","9874563214");
+
 	 window.location.href = "../index2.html";
   $scope.error = "Wait ...";  
         http = localStorage.getItem("serverpath")+"data.php?Code=logincheck&username="+$scope.username+"&password="+$scope.password+"&ip="+localStorage.getItem("Ip")+"&location="+localStorage.getItem("Location");

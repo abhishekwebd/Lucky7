@@ -25,7 +25,7 @@
             <!-- Page Content Holder -->
             <div id="content" style="padding: 5px;">
 
-                         <nav class="navbar navbar-default">
+                         <nav class="navbar navbar-default" style="margin-bottom: 0px;">
                     <div class="container-fluid">
 
                         <div class="navbar-header">
@@ -53,8 +53,8 @@
 
                
               <br>
-              <img src="img/Img1.png" style="width: 100%;">
-            
+              <img src="img/img2.jpg" style="width: 100%;">
+       
 
             </div>
         </div>
@@ -83,7 +83,7 @@ if(mm<10){
 } 
 var today = dd+'-'+mm+'-'+yyyy;
 
-      $scope.dateandtime = Date().toString("dd-MM-yyyy");
+      $scope.dateandtime = today;
     $scope.Logout = function () {
 
                 localStorage.removeItem("Code");
