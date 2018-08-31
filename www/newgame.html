@@ -12,11 +12,12 @@
         <link rel="stylesheet" href="css/style2.css">
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-
+ <link rel="stylesheet" href="css/loader.css">
     </head>
     <body>
 
-
+    <div id="loading" class="loader">   
+    </div>
    <div ng-app="myApp"  ng-controller="NewGameCtrl">
         <div class="wrapper">
             <!-- Sidebar Holder -->
@@ -106,6 +107,7 @@ var today = dd+'-'+mm+'-'+yyyy;
 });
 
 </script>
+   <script type="text/javascript" src="js/sc_index.js"></script>
         <!-- Bootstrap Js CDN -->
         <script src="js/bootstrap.min.js"></script>
         <!-- jQuery Custom Scroller CDN -->
