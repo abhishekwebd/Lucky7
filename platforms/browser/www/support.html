@@ -17,7 +17,7 @@
     <body>
 
 
-   <div ng-app="myApp"  ng-controller="HomeCtrl">
+   <div ng-app="myApp"  ng-controller="SupportCtrl">
         <div class="wrapper">
             <!-- Sidebar Holder -->
                    <div ng-include="'sidebar.html'"></div>
@@ -34,18 +34,7 @@
                                 <span>Toggle Sidebar</span>
 
                             </button>
-
-                            <div class="btn-group pull-right" role="group" aria-label="Button group with nested dropdown">
-  <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-bell"></i></button>
-  <div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      <a class="dropdown-item" href="#">Dropdown link</a>
-      <a class="dropdown-item" href="#">Dropdown link</a>
-    </div>
-  </div>
-</div>
-                          <!--    <a href="#" class="pull-right"> &nbsp;&nbsp;&nbsp; </a> -->
+                             <a href="#" class="pull-right"> &nbsp;&nbsp;&nbsp; <i class="glyphicon glyphicon-bell"></i></a>
 
                                  <span class="pull-right">{{dateandtime}}</span>
 
@@ -64,8 +53,38 @@
 
                
               <br>
-              <img src="img/img2.jpg" style="width: 100%;">
+            
        
+       <div class="container">
+                <div class="contact-info">
+                    <h3 class="c-text">Find Us</h3>
+                </div>
+                <div class="map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3606.3274812187797!2d82.98406341448357!3d25.326789783836126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2de6e196cbb3%3A0x1527bb81c5e30918!2sVaranasi!5e0!3m2!1sen!2sin!4v1535615216968" width="100%"  frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+                <div class="contact-grids">
+                    <div class="col-md-4 contact-grid-left">
+                        <h3>Address :</h3>
+                        <p>The Company Name agi.
+                        <span>756 gt globel Place,</span>
+                            CD-Road,M 07 435.
+                        </p>
+                    </div>
+                    <div class="col-md-4 contact-grid-middle">
+                        <h3>Phones :</h3>
+                        <ul>
+                            <li>Ph 1: +1 123 456 7890</li>
+                            <li>Ph 2: +1 123 486 2880</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 contact-grid-right">
+                        <h3>E-mail :</h3>
+                        <a href="mailto:info@example.com">mail@example.com</a>
+                    </div>
+                    <div class="clearfix"> </div>
+                
+                </div>
+            </div>
 
             </div>
         </div>
@@ -80,7 +99,7 @@
 
 <script>
     var app = angular.module('myApp', []);
-    app.controller('HomeCtrl', function ($scope, $http) {
+    app.controller('SupportCtrl', function ($scope, $http) {
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
