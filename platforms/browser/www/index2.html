@@ -33,34 +33,22 @@
                     <div class="container-fluid">
 
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <button type="button" id="sidebarCollapse" class="btn cl_main_btn btn-info navbar-btn" >
                                 <i class="glyphicon glyphicon-align-left"></i>
                                 <span>Toggle Sidebar</span>
 
                             </button>
                             <div class="btn-group pull-right" role="group">
-    <button id="btnGroupDrop1" type="button" class="glyphicon glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
+    <button id="btnGroupDrop1" type="button" style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
     <div class="dropdown-menu container" aria-labelledby="btnGroupDrop1">
-        <ul class="ul">
-            <li>
-                <a class="dropdown-item" href="#">Mail Message 1</a>
+        <ul >
+            <li ng-repeat="x in notificationlist" >
+                <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
             </li>
-            <li>
-                <a class="dropdown-item" href="#">Mail Message 2</a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="#">Mail Message 3</a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="#">Mail Message 4</a>
-            </li>
-            <li>
-                <a class="dropdown-item" href="#">Mail Message 5</a>
-            </li>
-
-            <li>
-                <a class="dropdown-item" href="#">See More</a>
-            </li>
+            <hr>
+           <li>
+               <a href="notifications.html">View All</a>
+           </li>
         </ul>
       <br>
   
@@ -82,12 +70,45 @@
   
                
               <br>
-           <img src="img/img2.jpg" style="width: 100%;">
-       <div class="text-center">
-        <br>
-            <a href="newgame.html" class=""> <img src="img/playnow.png" style="height: 150px"> </a> 
-            <br>
-       </div>
+     
+     <div class="container">
+      
+                <table class="table">
+                    <tr>
+                        <td>
+                           <div class="alert alert-dismissible alert-primary panel-primary panel">
+  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+  <a href="#" class="alert-link">Total Games Win</a><br> 2/5
+</div> 
+                        </td>
+                        <td>
+                            <div class="alert alert-dismissible alert-primary panel-primary panel">
+<!--   <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+ <a href="#" class="alert-link">Total Games Lose</a><br> 3/5
+</div>
+                        </td>
+
+                    </tr>
+                    
+                         <tr>
+                        <td>
+                           <div class="alert alert-dismissible alert-primary panel-primary panel">
+ 
+  <a href="#" class="alert-link">Wallet Amount</a><br> &#8377; 450
+</div> 
+                        </td>
+                        <td>
+                            <div class="alert alert-dismissible alert-primary panel-primary panel">
+ 
+ <a href="#" class="alert-link">Next Game in </a> <br> 20 min
+</div>
+                        </td>
+
+                    </tr>
+
+                </table>
+      
+     </div>
 
 
 
@@ -119,6 +140,12 @@ if(mm<10){
 var today = dd+'-'+mm+'-'+yyyy;
 
       $scope.dateandtime = today;
+
+      var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
+      var http = localStorage.getItem("serverpath")+"data.php?Code=execute&q="+q;
+     
+      $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
+
     $scope.Logout = function () {
 
                 localStorage.removeItem("Code");

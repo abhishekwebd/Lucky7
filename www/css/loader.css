@@ -7,3 +7,7 @@
 	z-index: 9999;
 	background: url('../img/Animation1.gif') 50% 50% no-repeat rgb(249,249,249);
 }
+
+.cl_main_btn {
+	background:-webkit-linear-gradient(bottom, #29e812, #168c00);
+}
