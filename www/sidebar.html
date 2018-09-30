@@ -1,23 +1,22 @@
  <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
- <nav id="sidebar" style="background:-webkit-linear-gradient(top, #71af0d, #8fa400);">
+ <nav id="sidebar" style="background:-webkit-linear-gradient(top, #71af0d, #8fa400); font-family: Century Gothic;">
+                  <div id="dismiss" style="background:transparent;">
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                </div>
+
                 <div class="sidebar-header text-center"  style="background:-webkit-linear-gradient(top, #679c12, #4b9607);">
-                    <table class="table " style="border-width: 0px;">
-                        <tr>
-                            <td rowspan="3">
-                                <img src="img/logo.png" width="50px">
-                            </td>
-                        </tr>
-                        <tr class="pull-left">
+                    <table class="table" style="border-width: 0px; font-size: large;">
+                        <tr class="">
                             <td><i class="fa fa-user"></i> &nbsp; <label id="lblName"></label></td>
                         </tr>
-                        <tr class="pull-left">
+                        <tr class="">
                             <td><i class="fa fa-phone"></i> &nbsp; <label id="lblPhone"></label></td>
                         </tr>
                     </table>
                  <!--    <img src="img/logo.png" width="50%" > -->
                 </div>
 
-                <ul class="list-unstyled components" style="border-bottom: 0px solid #47748b; ">
+                <ul class="list-unstyled components" style="border-bottom: 0px solid #47748b; font-size: large; ">
                     <!-- <p>Dummy Heading</p> -->
                    <!--  <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
@@ -74,4 +73,30 @@
 
                         window.location.href = "login/login.html";
                     }
+
+
+
             </script>
+
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $("#sidebar").niceScroll({
+                     cursorcolor: '#53619d',
+                     cursorwidth: 4,
+                     cursorborder: 'none'
+                 });
+
+                 $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                 });
+
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').addClass('active');
+                     $('.overlay').fadeIn();
+                     $('.collapse.in').toggleClass('in');
+                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                 });
+             });
+         </script>

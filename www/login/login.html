@@ -113,7 +113,7 @@
 			$scope.Login = function () {
 
 				$scope.error = "Wait ...";  
-				http = localStorage.getItem("serverpath")+"data.php?Code=logincheck&username="+$scope.username+"&password="+$scope.password+"&ip="+localStorage.getItem("Ip")+"&location="+localStorage.getItem("Location");
+				http = localStorage.getItem("serverpath")+"data.php?func=logincheck&username="+$scope.username+"&password="+$scope.password+"&ip="+localStorage.getItem("Ip")+"&location="+localStorage.getItem("Location");
         //the REST service Server to fetch the day stock 
 
         $http.get(http)

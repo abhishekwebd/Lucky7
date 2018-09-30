@@ -136,7 +136,7 @@
 				{
 					if($scope.Password == $scope.CPassword)
 					{
-						http = localStorage.getItem("serverpath")+"data.php?Code=UserReg&fullname="+$scope.fullname+"&phone="+$scope.Mobile+"&email="+$scope.Email+"&password="+$scope.Password+"&ip="+localStorage.getItem("Ip")+"&location="+localStorage.getItem("Location");
+						http = localStorage.getItem("serverpath")+"data.php?func=UserReg&fullname="+$scope.fullname+"&phone="+$scope.Mobile+"&email="+$scope.Email+"&password="+$scope.Password+"&ip="+localStorage.getItem("Ip")+"&location="+localStorage.getItem("Location");
         //the REST service Server to fetch the day stock 
 
 				        $http.get(http)

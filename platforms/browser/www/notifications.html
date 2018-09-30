@@ -1,81 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Collapsible sidebar using Bootstrap 3</title>
+
+          <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="css/style3.css">
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="css/loader.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    </head>
+    <body>
 
 
-  <title>Home</title>
+    <div id="loading" class="loader">   
+    </div>
+     <div ng-app="myApp"  ng-controller="HomeCtrl">
 
-  <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- Our Custom CSS -->
-  <link rel="stylesheet" href="css/style2.css">
-  <!-- Scrollbar Custom CSS -->
-  <link rel="stylesheet" href="css/loader.css">
-  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+              <div ng-include="'sidebar.html'"></div>
 
-</head>
-<body>
+            <!-- Page Content Holder -->
+            <div id="content" style="padding: 0px;">
 
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
 
-  <div id="loading" class="loader">   
-  </div>
-  <div ng-app="myApp"  ng-controller="HomeCtrl">
-    <div class="wrapper">
-      <!-- Sidebar Holder -->
-      <div ng-include="'sidebar.html'"></div>
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" 
+                            style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                             
+                            </button>
 
-      <!-- Page Content Holder -->
-      <div id="content" style="padding: 5px;">
-
-        <!--  <div ng-include="'navbar-default.html'"></div>  -->
-        <nav class="navbar navbar-default" style="margin-bottom: 0px;">
-          <div class="container-fluid">
-
-            <div class="navbar-header">
-              <button type="button" id="sidebarCollapse" class="btn cl_main_btn btn-info navbar-btn" >
-                <i class="glyphicon glyphicon-align-left"></i>
-                <span>Toggle Sidebar</span>
-
-              </button>
-              <div class="btn-group pull-right" role="group">
-                <button id="btnGroupDrop1" type="button" style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
-                <div class="dropdown-menu container" aria-labelledby="btnGroupDrop1">
-                  <ul >
-                    <li ng-repeat="x in notificationlist" >
-                      <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
-                    </li>
-                    <hr>
-                    <li>
-                     <a href="notifications.html">View All</a>
-                   </li>
-                 </ul>
-                 <br>
-
-               </div>
-             </div>
-
-           </div>
-
-           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Page</a></li>
-              <li><a href="#">Page</a></li>
-              <li><a href="#">Page</a></li>
-              <li><a href="#">Page</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-
+                                              <div class="btn-group pull-right" role="group">
+    <button id="btnGroupDrop1" type="button" style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
+    <div class="dropdown-menu container" aria-labelledby="btnGroupDrop1">
+        <ul >
+            <li ng-repeat="x in notificationlist" >
+                <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
+            </li>
+            <hr>
+           <li>
+               <a href="notifications.html">View All</a>
+           </li>
+        </ul>
       <br>
+  
+    </div>
+  </div>
+                        </div>
 
-      <div class="container">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+  
+
+        <div class="container">
 
        <div class="list-group" ng-repeat="x in notifications">
         <a href="#" class="list-group-item list-group-item-action active">
-          {{x.Subject}}
+          {{x.Subject}} <span class="pull-right">{{x.Dated}}</span>
         </a>
         <a href="#" class="list-group-item list-group-item-action"> {{x.Message}}
         </a>
@@ -84,36 +82,37 @@
       
     </div>
 
-
-
-  </div>
-</div>
+            </div>
+        </div>
 
 </div>
 
+        <div class="overlay"></div>
 
 
-<!-- jQuery CDN -->
-<script src="js/jquery-1.12.0.min.js"></script>
-<script src="js/angular.min.js"></script>
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+          <script src="js/angular.min.js"></script>
+
+
 
 <script>
-  var app = angular.module('myApp', []);
-  app.controller('HomeCtrl', function ($scope, $http) {
-    var today = new Date();
-    var dd = today.getDate();
+    var app = angular.module('myApp', []);
+    app.controller('HomeCtrl', function ($scope, $http) {
+var today = new Date();
+var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
 
 var yyyy = today.getFullYear();
 if(dd<10){
-  dd='0'+dd;
+    dd='0'+dd;
 } 
 if(mm<10){
-  mm='0'+mm;
+    mm='0'+mm;
 } 
 var today = dd+'-'+mm+'-'+yyyy;
 
-$scope.dateandtime = today;
+      $scope.dateandtime = today;
 
 
 $scope.LoadNotificationAlert = function(){
@@ -126,7 +125,7 @@ $http.get(http).then(function (response) {$scope.notificationlist = response.dat
 
 $scope.LoadNotifications = function(){
 
-  var q = "select Code,Subject,Message from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
+  var q = "select Code,Subject,Message,Dated from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
 var http = localStorage.getItem("serverpath")+"data.php?Code=execute&q="+q;
 
 $http.get(http).then(function (response) {$scope.notifications = response.data.result; });
@@ -135,38 +134,49 @@ $http.get(http).then(function (response) {$scope.notifications = response.data.r
 
 $scope.LoadNotificationAlert();
 $scope.LoadNotifications();
-$scope.Logout = function () {
-
-  localStorage.removeItem("Code");
-  localStorage.removeItem("Name");
-  localStorage.removeItem("Email");
-  window.location.href= "login/login.html";
-}
 
 
+    $scope.Logout = function () {
 
+                localStorage.removeItem("Code");
+                 localStorage.removeItem("Name");
+                 localStorage.removeItem("Email");
+                 window.location.href= "login/login.html";
+    }
+  
 
+    
+    
 });
 
 </script>
-<!-- Bootstrap Js CDN -->
-<script type="text/javascript" src="js/sc_index.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!-- jQuery Custom Scroller CDN -->
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <!-- Bootstrap Js CDN -->
+        <script type="text/javascript" src="js/sc_index.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <!-- jQuery Nicescroll CDN -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("#sidebar").mCustomScrollbar({
-      theme: "minimal"
-    });
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $("#sidebar").niceScroll({
+                     cursorcolor: '#53619d',
+                     cursorwidth: 4,
+                     cursorborder: 'none'
+                 });
 
-    $('#sidebarCollapse').on('click', function () {
-      $('#sidebar, #content').toggleClass('active');
-      $('.collapse.in').toggleClass('in');
-      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    });
-  });
-</script>
-</body>
+                 $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                 });
+
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').addClass('active');
+                     $('.overlay').fadeIn();
+                     $('.collapse.in').toggleClass('in');
+                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                 });
+             });
+         </script>
+    </body>
 </html>
