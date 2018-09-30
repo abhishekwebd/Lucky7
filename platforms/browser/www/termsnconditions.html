@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Home</title>
+        <title>Collapsible sidebar using Bootstrap 3</title>
 
-        <!-- Bootstrap CSS CDN -->
+          <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="css/style2.css">
+        <link rel="stylesheet" href="css/style3.css">
         <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="css/loader.css">
         <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
- <link rel="stylesheet" href="css/loader.css">
     </head>
     <body>
 
+
     <div id="loading" class="loader">   
     </div>
-   <div ng-app="myApp"  ng-controller="TermsnconditionsCtrl">
+     <div ng-app="myApp"  ng-controller="HomeCtrl">
+
         <div class="wrapper">
             <!-- Sidebar Holder -->
-                   <div ng-include="'sidebar.html'"></div>
+              <div ng-include="'sidebar.html'"></div>
 
             <!-- Page Content Holder -->
-            <div id="content" style="padding: 5px;">
+              <div id="content" style="padding: 0px;background-image: url(http://hdbackgroundspic.com/wp-content/uploads/2018/06/surface-Shadow-Background.jpg);background-repeat: no-repeat; background-size: cover;">
 
-                           <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+                <nav class="navbar navbar-default">
                     <div class="container-fluid">
 
                         <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" 
+                            style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);">
                                 <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Toggle Sidebar</span>
-
+                             
                             </button>
-                            <div class="btn-group pull-right" role="group">
-    <button id="btnGroupDrop1" type="button" class="glyphicon glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
+
+                                              <div class="btn-group pull-right" role="group">
+    <button id="btnGroupDrop1" type="button" style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
     <div class="dropdown-menu container" aria-labelledby="btnGroupDrop1">
-      <a class="dropdown-item" href="#">Mail Message 1</a><br>
-      <a class="dropdown-item" href="#">Mail Message 2</a><br>
-      <a class="dropdown-item" href="#">Mail Message 3</a><br>
-      <a class="dropdown-item" href="#">Mail Message 4</a><br>
-      <a class="dropdown-item" href="#">Mail Message 5</a><br>
-      <a class="dropdown-item" href="#">See More</a>
+        <ul >
+            <li ng-repeat="x in notificationlist" >
+                <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
+            </li>
+            <hr>
+           <li>
+               <a href="notifications.html">View All</a>
+           </li>
+        </ul>
+      <br>
+  
     </div>
   </div>
-
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -59,10 +67,9 @@
                         </div>
                     </div>
                 </nav>
-               
-              <br>
-              <div class="container">
-              <h1>Spotify Terms and Conditions of Use</h1>
+  <div class="container" style="color: white;">
+      
+          <h1>Spotify Terms and Conditions of Use</h1>
 
 <p>Effective as from  5 March 2014</p>
 
@@ -522,24 +529,26 @@ arises in connection with these Agreements.</p>
 <p>Copyright © 2012 Spotify AB. All rights reserved. </p>
 
 <p>Spotify Limited, 4th Floor, 25 Argyll Street, London W1F 7TU, United Kingdom</p>
-
-          </div>
-       
+     
+     </div>
 
             </div>
         </div>
 
 </div>
 
+        <div class="overlay"></div>
 
 
         <!-- jQuery CDN -->
-        <script src="js/jquery-1.12.0.min.js"></script>
-    <script src="js/angular.min.js"></script>
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+          <script src="js/angular.min.js"></script>
+
+
 
 <script>
     var app = angular.module('myApp', []);
-    app.controller('TermsnconditionsCtrl', function ($scope, $http) {
+    app.controller('HomeCtrl', function ($scope, $http) {
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -554,6 +563,12 @@ if(mm<10){
 var today = dd+'-'+mm+'-'+yyyy;
 
       $scope.dateandtime = today;
+
+      var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
+      var http = localStorage.getItem("serverpath")+"data.php?Code=execute&q="+q;
+     
+      $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
+
     $scope.Logout = function () {
 
                 localStorage.removeItem("Code");
@@ -569,23 +584,32 @@ var today = dd+'-'+mm+'-'+yyyy;
 
 </script>
         <!-- Bootstrap Js CDN -->
-           <script type="text/javascript" src="js/sc_index.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <!-- jQuery Custom Scroller CDN -->
-        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="js/sc_index.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <!-- jQuery Nicescroll CDN -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#sidebar").mCustomScrollbar({
-                    theme: "minimal"
-                });
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $("#sidebar").niceScroll({
+                     cursorcolor: '#53619d',
+                     cursorwidth: 4,
+                     cursorborder: 'none'
+                 });
 
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar, #content').toggleClass('active');
-                    $('.collapse.in').toggleClass('in');
-                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-                });
-            });
-        </script>
+                 $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                 });
+
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').addClass('active');
+                     $('.overlay').fadeIn();
+                     $('.collapse.in').toggleClass('in');
+                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                 });
+             });
+         </script>
     </body>
 </html>
