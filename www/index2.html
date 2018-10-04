@@ -150,7 +150,7 @@ var today = dd+'-'+mm+'-'+yyyy;
       $scope.dateandtime = today;
 
       var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
-      var http = localStorage.getItem("serverpath")+"data.php?Code=execute&q="+q;
+      var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
      
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
 

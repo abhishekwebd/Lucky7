@@ -151,9 +151,7 @@ var today = dd+'-'+mm+'-'+yyyy;
 
            $http.get(localStorage.getItem("serverpath")+"data.php?func=getNewGame").then(function (response) 
         {
-          //  console.log(response); 
-          
-            if(response.data.result == undefined)
+            if(response.data.result[0].Code == undefined)
             {
                 alert("No Game Found");
                 window.location.href = "index2.html";
