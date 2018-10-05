@@ -14,6 +14,163 @@
         <!-- Scrollbar Custom CSS -->
         <link rel="stylesheet" href="css/loader.css">
         <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+        <style type="text/css">
+        .alert-dismissible {
+     padding-right: 0px;
+     padding-left: 5px;
+     text-align: center;
+}
+            .progress{
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    background: none;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+}
+.progress:after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 12px solid #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.progress > span{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+.progress .progress-left{
+    left: 0;
+}
+.progress .progress-bar{
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 12px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+}
+.progress .progress-left .progress-bar{
+    left: 100%;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+}
+.progress .progress-right{
+    right: 0;
+}
+.progress .progress-right .progress-bar{
+    left: -100%;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
+    animation: loading-1 1.8s linear forwards;
+}
+.progress .progress-value{
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: #44484b;
+    font-size: 24px;
+    color: #fff;
+    line-height: 135px;
+    text-align: center;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.progress.blue .progress-bar{
+    border-color: #049dff;
+}
+.progress.blue .progress-left .progress-bar{
+    animation: loading-2 1.5s linear forwards 1.8s;
+}
+.progress.yellow .progress-bar{
+    border-color: #fdba04;
+}
+.progress.yellow .progress-left .progress-bar{
+    animation: loading-3 1s linear forwards 1.8s;
+}
+.progress.pink .progress-bar{
+    border-color: #ed687c;
+}
+.progress.pink .progress-left .progress-bar{
+    animation: loading-4 0.4s linear forwards 1.8s;
+}
+.progress.green .progress-bar{
+    border-color: #1abc9c;
+}
+.progress.green .progress-left .progress-bar{
+    animation: loading-5 1.2s linear forwards 1.8s;
+}
+@keyframes loading-1{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+@keyframes loading-2{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(144deg);
+        transform: rotate(144deg);
+    }
+}
+@keyframes loading-3{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+@keyframes loading-4{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(36deg);
+        transform: rotate(36deg);
+    }
+}
+@keyframes loading-5{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(126deg);
+        transform: rotate(126deg);
+    }
+}
+@media only screen and (max-width: 990px){
+    .progress{ margin-bottom: 20px; }
+}
+
+        </style>
     </head>
     <body>
 
@@ -34,13 +191,13 @@
 
                         <div class="navbar-header">
                             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" 
-                            style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);">
+                            style="background:rgb(214, 34, 2);">
                                 <i class="glyphicon glyphicon-align-left"></i>
                              
                             </button>
 
                                               <div class="btn-group pull-right" role="group">
-    <button id="btnGroupDrop1" type="button" style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
+    <button id="btnGroupDrop1" type="button" style="background:rgb(214, 34, 2);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
     <div class="dropdown-menu container" aria-labelledby="btnGroupDrop1">
         <ul >
             <li ng-repeat="x in notificationlist" >
@@ -72,15 +229,41 @@
                 <table class="table">
                     <tr>
                         <td>
-                           <div class="alert alert-dismissible alert-primary panel-primary panel">
-  <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-  <a href="#" class="alert-link">Total Games Win</a><br> 2/5
+                           <div class="alert alert-dismissible text-center alert-primary panel-primary panel">
+ <!--  <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+  <a href="#" class="alert-link">Total Games Win</a><br> 
+
+       <div class="progress yellow">
+
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">
+                75%</div>
+            </div>  
 </div> 
+
+
                         </td>
                         <td>
                             <div class="alert alert-dismissible alert-primary panel-primary panel">
 <!--   <button type="button" class="close" data-dismiss="alert">&times;</button> -->
- <a href="#" class="alert-link">Total Games Lose</a><br> 3/5
+ <a href="#" class="alert-link">Total Games Lose</a><br> 
+
+  <div class="progress yellow">
+
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">
+                75%</div>
+            </div>
 </div>
                         </td>
 
@@ -90,13 +273,36 @@
                         <td>
                            <div class="alert alert-dismissible alert-primary panel-primary panel">
  
-  <a href="#" class="alert-link">Wallet Amount</a><br> &#8377; 450
+  <a href="#" class="alert-link">Wallet Amount</a><br> 
+   <div class="progress yellow">
+
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">
+                &#8377; 200</div>
+            </div>
 </div> 
                         </td>
                         <td>
                             <div class="alert alert-dismissible alert-primary panel-primary panel">
  
- <a href="#" class="alert-link">Next Game in </a> <br> 20 min
+ <a href="#" class="alert-link">Next Game in </a> <br> 
+
+  <div class="progress yellow">
+
+                <span class="progress-left">
+                    <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                    <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">
+                12 min</div>
+            </div>
 </div>
                         </td>
 
