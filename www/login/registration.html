@@ -27,12 +27,12 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
 </head>
-<body style="background-image: url(../img/background.png); background-repeat: no-repeat; background-size: cover; color: black;">
+<body style="background-image: url(../img/background.png); background-repeat: repeat; background-size: cover; color: black;">
 	
 	<div ng-app="myApp"  ng-controller="RegCtrl">
 		<div class="limiter">
-			<div class="" style="background-image: url(../img/background.png); background-repeat: no-repeat; background-size: cover; padding-top: 10%;" >
-				<div class="" style="background-image: url(../img/background.png); background-repeat: no-repeat; background-size: cover; padding: 20px;">
+			<div class="" style=" padding-top: 10%;" >
+				<div class="" style=" padding: 20px;">
 					<form class="login100-form validate-form">
 						<span class="login100-form-logo">
 							<img src="../img/logo.png" width="110px">
@@ -54,17 +54,17 @@
 						</div>
 
 						<div class="wrap-input100 validate-input" data-validate = "Enter Mobile">
-							<input class="input100" type="text" name="username" ng-model="Mobile" placeholder="Mobile No">
+							<input class="input100" type="text" maxlength="10" name="username" ng-model="Mobile" placeholder="Mobile No">
 							<span class="focus-input100" data-placeholder="&#9990;"></span>
 						</div>
 
 						<div class="wrap-input100 validate-input" data-validate="Enter password">
-							<input class="input100" type="password" name="pass" ng-model="Password" placeholder="Password">
+							<input class="input100" type="password" name="pass" ng-model="Password" placeholder="Password" >
 							<span class="focus-input100" data-placeholder="&#xf191;"></span>
 						</div>
 
 						<div class="wrap-input100 validate-input" data-validate = "Enter Confirm Password">
-							<input class="input100" type="password" name="username" ng-model="CPassword" placeholder="Confirm Password">
+							<input class="input100" type="password" name="username" ng-model="CPassword" placeholder="Confirm Password" >
 							<span class="focus-input100" data-placeholder="&#xf191;"></span>
 						</div>
 
@@ -80,9 +80,7 @@
 							<a class="txt1" href="login.html">Already have an account ? Login Here</a>
 						</div>
 
-						<div style="min-height: 60px;">
-
-						</div>
+					
 					</form>
 				</div>
 			</div>

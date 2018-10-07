@@ -89,14 +89,14 @@
         </td>
     </tr>
     <tr>
-        <td><select class="form-control">
-            <option>50</option>
+        <td style="padding: 15px;"><select class="form-control">
+            <option ng-repeat="x in amounts" value="{{x.Code}}">{{x.Amount}}</option>
         </select></td>
-        <td><select class="form-control">
-            <option>50</option>
+        <td style="padding: 15px;"><select class="form-control">
+            <option ng-repeat="x in amounts" value="{{x.Code}}">{{x.Amount}}</option>
         </select></td>
-        <td><select class="form-control">
-            <option>50</option>
+        <td style="padding: 15px;"><select class="form-control">
+            <option ng-repeat="x in amounts" value="{{x.Code}}">{{x.Amount}}</option>
         </select></td>
     </tr>
   
@@ -146,12 +146,15 @@ var today = dd+'-'+mm+'-'+yyyy;
 
       var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
-     
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
 
+     q = "select * from tblamounts";
+       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+      $http.get(http).then(function (response) {$scope.amounts = response.data.result; });
+     
            $http.get(localStorage.getItem("serverpath")+"data.php?func=getNewGame").then(function (response) 
-        {
-            if(response.data.result[0].Code == undefined)
+            {
+            if(response.data.result == undefined || response.data.result == "")
             {
                 alert("No Game Found");
                 window.location.href = "index2.html";

@@ -2,10 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Wallet</title>
+        <title>Collapsible sidebar using Bootstrap 3</title>
 
           <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -21,7 +21,7 @@
      text-align: center;
 }
             .progress{
-    widtd: 150px;
+    width: 150px;
     height: 150px;
     line-height: 150px;
     background: none;
@@ -31,7 +31,7 @@
 }
 .progress:after{
     content: "";
-    widtd: 100%;
+    width: 100%;
     height: 100%;
     border-radius: 50%;
     border: 12px solid #fff;
@@ -40,7 +40,7 @@
     left: 0;
 }
 .progress > span{
-    widtd: 50%;
+    width: 50%;
     height: 100%;
     overflow: hidden;
     position: absolute;
@@ -51,10 +51,10 @@
     left: 0;
 }
 .progress .progress-bar{
-    widtd: 100%;
+    width: 100%;
     height: 100%;
     background: none;
-    border-widtd: 12px;
+    border-width: 12px;
     border-style: solid;
     position: absolute;
     top: 0;
@@ -80,7 +80,7 @@
     animation: loading-1 1.8s linear forwards;
 }
 .progress .progress-value{
-    widtd: 90%;
+    width: 90%;
     height: 90%;
     border-radius: 50%;
     background: #44484b;
@@ -166,7 +166,7 @@
         transform: rotate(126deg);
     }
 }
-@media only screen and (max-widtd: 990px){
+@media only screen and (max-width: 990px){
     .progress{ margin-bottom: 20px; }
 }
 
@@ -203,7 +203,7 @@
             <li ng-repeat="x in notificationlist" >
                 <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
             </li>
-            <hr>
+           
            <li>
                <a href="notifications.html">View All</a>
            </li>
@@ -224,43 +224,48 @@
                         </div>
                     </div>
                 </nav>
-  <div class="container" style="padding-right: 0px;padding-left: 0px;">
+  <div class="container" style="padding-right: 10px;padding-left: 10px;">
       
-  <div class="alert alert-dismissible alert-info">
-  <strong>&#8377; <span style="font-size: xx-large;">{{walletamount}}</span></strong> 
+      <div class="form" style="color: white;" >
+     <a href="addBankDetails.html" class="pull-right">Update Data</a>
+       
+        <div class="form-group">
+  <label class="col-form-label" for="inputDefault">Account Holder Name</label>
+  <label type="text" class="form-control" ng-bind="txtaccountholdername" >
 </div>
 
-<div class="text-center">
-   <a class="btn btn-primary btn-block" href="addMoney.html"><i class="fa fa-plus"></i><br> Add Money</a>
-  <br>
-  <a class="btn btn-primary btn-block" href="RedeemMoney.html"><i class="fa fa-minus"></i><br> Redeem Money</a>
-  <br>
-  <a class="btn btn-primary btn-block" href="BankDetails.html"><i class="fa fa-bank"></i><br> Bank Details</a>
+    <div class="form-group">
+  <label class="col-form-label" for="inputDefault">Account Number</label>
+    <label type="text" class="form-control" ng-bind="txtaccountnumber" >
+
 </div>
 
-  
-<hr>
-<div style="overflow: scroll;">
+ <div class="form-group">
+  <label class="col-form-label" for="inputDefault">Bank IFSC Code</label>
 
-  <table class="table table-bordered" style="color: white;">
-  <tr style="background-color: green;">
-        <th>Mode</th>
-        <th>Amount</th>
-        <th>Dr / Cr</th>
-        <th>Remark</th>
-      </tr>
-     
-      <tr  ng-repeat="x in transactions">
-        <td>{{x.Mode}}</td>
-        <td>{{x.Amount}}</td>
-        <td>{{x.Type}}</td>
-        <td>{{x.Remark}}</td>
-      </tr>
-     
-    </table>
+    <label type="text" class="form-control" ng-bind="txtifscnumber" >
 
- <div style="color: white; text-align: center;"> {{alertfortransaction}}</div>
 </div>
+
+ <div class="form-group">
+  <label class="col-form-label" for="inputDefault">UPI</label>
+ <label type="text" class="form-control" ng-bind="txtupinumber" >
+
+</div>
+   <br>
+ <b>Paytm Details</b>
+     <hr>
+         <div class="form-group">
+  <label class="col-form-label" for="inputDefault">Paytm No</label>
+
+ <label type="text" class="form-control" ng-bind="txtpaytmaccountnumber" >
+ 
+</div>
+
+      </div>
+
+
+
      </div>
 
             </div>
@@ -294,19 +299,25 @@ if(mm<10){
 var today = dd+'-'+mm+'-'+yyyy;
 
       $scope.dateandtime = today;
-$scope.walletamount = localStorage.getItem("WalletAmount");
 
       var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
      
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
 
-q = "select Amount,Mode,Type,Date,Remark from TblTransactions where UserCode = "+localStorage.getItem("Code")+" order by Code desc";
-   http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+q = "select * from TblBankDetails where UserCode = "+localStorage.getItem("Code");
+http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
 
-      $http.get(http).then(function (response) {$scope.transactions = response.data.result;
-        if(response.data.result == ""){ $scope.alertfortransaction = "No Record Found";}
-       });
+ $http.get(http).then(function (response) {
+  $scope.txtaccountholdername = response.data.result[0].AccountHolderName;
+  $scope.txtaccountnumber = response.data.result[0].BankAccountNo;
+  $scope.txtifscnumber = response.data.result[0].IFSC;
+  if(response.data.result[0].UPI != "undefined")
+{
+   $scope.txtupinumber = response.data.result[0].UPI;
+  }
+  $scope.txtpaytmaccountnumber = response.data.result[0].PaytmNO;
+  });
     $scope.Logout = function () {
 
                 localStorage.removeItem("Code");
@@ -316,7 +327,6 @@ q = "select Amount,Mode,Type,Date,Remark from TblTransactions where UserCode = "
     }
   
 
-    
     
 });
 
@@ -332,7 +342,7 @@ q = "select Amount,Mode,Type,Date,Remark from TblTransactions where UserCode = "
              $(document).ready(function () {
                  $("#sidebar").niceScroll({
                      cursorcolor: '#53619d',
-                     cursorwidtd: 4,
+                     cursorwidth: 4,
                      cursorborder: 'none'
                  });
 

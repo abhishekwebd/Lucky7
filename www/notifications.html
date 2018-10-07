@@ -27,20 +27,20 @@
               <div ng-include="'sidebar.html'"></div>
 
             <!-- Page Content Holder -->
-            <div id="content" style="padding: 0px;">
+            <div id="content"  style="padding: 0px;background-image: url(http://hdbackgroundspic.com/wp-content/uploads/2018/06/surface-Shadow-Background.jpg);background-repeat: no-repeat; background-size: cover;">
 
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
 
                         <div class="navbar-header">
                             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" 
-                            style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);">
+                            style="background:rgb(214, 34, 2);">
                                 <i class="glyphicon glyphicon-align-left"></i>
                              
                             </button>
 
                                               <div class="btn-group pull-right" role="group">
-    <button id="btnGroupDrop1" type="button" style="background:-webkit-linear-gradient(bottom, #29e812, #168c00);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
+    <button id="btnGroupDrop1" type="button" style="background:rgb(214, 34, 2);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
     <div class="dropdown-menu container" aria-labelledby="btnGroupDrop1">
         <ul >
             <li ng-repeat="x in notificationlist" >
@@ -118,7 +118,7 @@ var today = dd+'-'+mm+'-'+yyyy;
 $scope.LoadNotificationAlert = function(){
 
   var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
-var http = localStorage.getItem("serverpath")+"data.php?Code=execute&q="+q;
+var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
 
 $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
 }
@@ -126,7 +126,7 @@ $http.get(http).then(function (response) {$scope.notificationlist = response.dat
 $scope.LoadNotifications = function(){
 
   var q = "select Code,Subject,Message,Dated from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
-var http = localStorage.getItem("serverpath")+"data.php?Code=execute&q="+q;
+var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
 
 $http.get(http).then(function (response) {$scope.notifications = response.data.result; });
 }

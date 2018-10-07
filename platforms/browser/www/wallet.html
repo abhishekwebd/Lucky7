@@ -2,10 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Collapsible sidebar using Bootstrap 3</title>
+        <title>Wallet</title>
 
           <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -21,7 +21,7 @@
      text-align: center;
 }
             .progress{
-    width: 150px;
+    widtd: 150px;
     height: 150px;
     line-height: 150px;
     background: none;
@@ -31,7 +31,7 @@
 }
 .progress:after{
     content: "";
-    width: 100%;
+    widtd: 100%;
     height: 100%;
     border-radius: 50%;
     border: 12px solid #fff;
@@ -40,7 +40,7 @@
     left: 0;
 }
 .progress > span{
-    width: 50%;
+    widtd: 50%;
     height: 100%;
     overflow: hidden;
     position: absolute;
@@ -51,10 +51,10 @@
     left: 0;
 }
 .progress .progress-bar{
-    width: 100%;
+    widtd: 100%;
     height: 100%;
     background: none;
-    border-width: 12px;
+    border-widtd: 12px;
     border-style: solid;
     position: absolute;
     top: 0;
@@ -80,7 +80,7 @@
     animation: loading-1 1.8s linear forwards;
 }
 .progress .progress-value{
-    width: 90%;
+    widtd: 90%;
     height: 90%;
     border-radius: 50%;
     background: #44484b;
@@ -166,7 +166,7 @@
         transform: rotate(126deg);
     }
 }
-@media only screen and (max-width: 990px){
+@media only screen and (max-widtd: 990px){
     .progress{ margin-bottom: 20px; }
 }
 
@@ -226,101 +226,41 @@
                 </nav>
   <div class="container" style="padding-right: 0px;padding-left: 0px;">
       
-                <table class="table">
-                    <tr>
-                        <td>
-                           <div class="alert alert-dismissible text-center alert-primary panel-primary panel">
- <!--  <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-  <a href="#" class="alert-link">Total Games Win</a><br> 
-
-       <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                75%</div>
-            </div>  
-</div> 
-
-
-                        </td>
-                        <td>
-                            <div class="alert alert-dismissible alert-primary panel-primary panel">
-<!--   <button type="button" class="close" data-dismiss="alert">&times;</button> -->
- <a href="#" class="alert-link">Total Games Lose</a><br> 
-
-  <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                75%</div>
-            </div>
+  <div class="alert alert-dismissible alert-info">
+  <strong>&#8377; <span style="font-size: xx-large;">{{walletamount}}</span></strong> 
 </div>
-                        </td>
 
-                    </tr>
-                    
-                         <tr>
-                        <td>
-                           <div class="alert alert-dismissible alert-primary panel-primary panel">
- 
-  <a href="#" class="alert-link">Wallet Amount</a><br> 
-   <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                &#8377; 200</div>
-            </div>
-</div> 
-                        </td>
-                        <td>
-                            <div class="alert alert-dismissible alert-primary panel-primary panel">
- 
- <a href="#" class="alert-link">Next Game in </a> <br> 
-
-  <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                12 min</div>
-            </div>
+<div class="text-center">
+   <a class="btn btn-primary btn-block" href="addMoney.html"><i class="fa fa-plus"></i><br> Add Money</a>
+  <br>
+  <a class="btn btn-primary btn-block" href="RedeemMoney.html"><i class="fa fa-minus"></i><br> Redeem Money</a>
+  <br>
+  <a class="btn btn-primary btn-block" href="BankDetails.html"><i class="fa fa-bank"></i><br> Bank Details</a>
 </div>
-                        </td>
 
-                    </tr>
-
-<tr>
-  <td colspan="2" class="text-center">
-         
-    <a href="newgame.html" class="text-center">  <img src="img/playnow.png" class="text-center" width="250px">   
-     </a>
-
-  </td>
-</tr>
-                </table>
-      
   
+<hr>
+<div style="overflow: scroll;">
 
+  <table class="table table-bordered" style="color: white;">
+  <tr style="background-color: green;">
+        <th>Mode</th>
+        <th>Amount</th>
+        <th>Dr / Cr</th>
+        <th>Remark</th>
+      </tr>
      
+      <tr  ng-repeat="x in transactions">
+        <td>{{x.Mode}}</td>
+        <td>{{x.Amount}}</td>
+        <td>{{x.Type}}</td>
+        <td>{{x.Remark}}</td>
+      </tr>
+     
+    </table>
+
+ <div style="color: white; text-align: center;"> {{alertfortransaction}}</div>
+</div>
      </div>
 
             </div>
@@ -354,12 +294,19 @@ if(mm<10){
 var today = dd+'-'+mm+'-'+yyyy;
 
       $scope.dateandtime = today;
+$scope.walletamount = localStorage.getItem("WalletAmount");
 
       var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
      
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
 
+q = "select Amount,Mode,Type,Date,Remark from TblTransactions where UserCode = "+localStorage.getItem("Code")+" order by Code desc";
+   http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+
+      $http.get(http).then(function (response) {$scope.transactions = response.data.result;
+        if(response.data.result == ""){ $scope.alertfortransaction = "No Record Found";}
+       });
     $scope.Logout = function () {
 
                 localStorage.removeItem("Code");
@@ -385,7 +332,7 @@ var today = dd+'-'+mm+'-'+yyyy;
              $(document).ready(function () {
                  $("#sidebar").niceScroll({
                      cursorcolor: '#53619d',
-                     cursorwidth: 4,
+                     cursorwidtd: 4,
                      cursorborder: 'none'
                  });
 
