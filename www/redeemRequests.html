@@ -203,7 +203,7 @@
             <li ng-repeat="x in notificationlist" >
                 <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
             </li>
-           
+            <hr>
            <li>
                <a href="notifications.html">View All</a>
            </li>
@@ -224,63 +224,32 @@
                         </div>
                     </div>
                 </nav>
-  <div class="container" style="padding-right: 10px;padding-left: 10px;">
+  <div class="container" style="padding-right: 10px;padding-left: 10px; color: white; ">
       
-      <div class="form-group" style="color: white;">
-        <b>Select Account To Redeem</b><br><br>
-        <div  style="margin-bottom: 20px;">
-             <div class="custom-control form-control custom-radio" id="divBankAccNo" >
-      <input type="radio" id="customRadio1" name="customRadio" ng-model="method" value="BankAccount" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio1">Bank Account : {{Accountnumber}}</label>
-    </div>
-        </div>
-   
 
-    <div  style="margin-bottom: 20px;">
-    <div class="custom-control form-control custom-radio" id="divPaytmNo">
-      <input type="radio" id="customRadio2" name="customRadio" ng-model="method" value="Paytm" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio2">Paytm : {{PaytmNo}}</label>
-    </div>
-  </div>
+              <b>Redeem Requests</b>
+<a href="RedeemMoney.html" class="pull-right"><b>Submit Request</b></a>
+              <br>
+      <div style="overflow: scroll;">
   
-     <div  style="margin-bottom: 20px;">
-       <div class="custom-control form-control custom-radio" id="divUPI" >
-      <input type="radio" id="customRadio3" name="customRadio" ng-model="method" value="UPI" class="custom-control-input">
-      <label class="custom-control-label" for="customRadio3">UPI : {{UPI}}</label>
-    </div>
+  <table class="table table-bordered">
+    <tr>
+      <th>Amount</th>
+      <th>Request Date</th>
+      <th>Method</th>
+      <th>IsRedeemed</th>
+      <th>Remark</th>
+    </tr>
+    <tr ng-repeat="x in redeemData">
+      <td>{{x.Amount}}</td>
+      <td>{{x.CreateDate}}</td>
+      <td>{{x.Method}}</td>
+      <td>{{x.IsRedeem}}</td>
+      <td>{{x.Remark}}</td>
+    </tr>
+  </table>
  </div>
-
- <div  style="margin-bottom: 20px;">
-   <div class="custom-control custom-radio" >
-
-              <div class="input-group">
-    <span class="input-group-addon"><i class="fa fa-rupee"></i></span>
-    <input id="amount" type="text" class="form-control" name="Amount" placeholder="Amount" ng-model="amount">
-  </div>
-                
-   </div>
- </div>
-
-
- <div  style="margin-bottom: 20px;">
-   <div class="custom-control custom-radio" >
-
-              <div class="input-group">
-    <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-    <textarea id="remark" type="text" rows="3" class="form-control" name="remark" placeholder="Remark" ng-model="remark"> </textarea>
-  </div>
-                
-   </div>
- </div>
-
-  <div  style="margin-bottom: 20px;">
-   <div class="custom-control custom-radio text-center" >
-    <span class="btn btn-info" ng-click="Save()">Save</span>
-   </div>
- </div>
-      </div>
-
-
+     
      </div>
 
             </div>
@@ -320,39 +289,10 @@ var today = dd+'-'+mm+'-'+yyyy;
      
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
 
-if(localStorage.getItem("WalletAmount") <= 0){
-alert("Insufficient Balance to Redeem");
-window.location.href = "wallet.html";
-}
-q = "select * from TblBankDetails where UserCode = "+localStorage.getItem("Code");
-http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
-
- $http.get(http).then(function (response) {
-
-
-    $("#divBankAccNo").css("display","none");
-    $("#divUPI").css("display","none");
-    $("#divPaytmNo").css("display","none");
-if( response.data.result[0].BankAccountNo != "")
-{
- $scope.Accountnumber = response.data.result[0].BankAccountNo;
- $("#divBankAccNo").css("display","initial"); 
-}
-  
-
-  if(response.data.result[0].UPI != "undefined")
-  {
-   $scope.txtupinumber = response.data.result[0].UPI;
-    $("#divUPI").css("display","initial"); 
-  }
-
-  if(response.data.result[0].PaytmNO != "")
-  {
-      $scope.PaytmNo = response.data.result[0].PaytmNO;
-       $("#divPaytmNo").css("display","initial");
-  }
-
-  });
+q = "select Amount,CAST(CreateDate as varchar(50)) as CreateDate,Remark,Method,IsRedeem from TblRedeemRequests where UserCode = "+localStorage.getItem("Code");
+ var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+     
+      $http.get(http).then(function (response) {$scope.redeemData = response.data.result; });
     $scope.Logout = function () {
 
                 localStorage.removeItem("Code");
@@ -361,25 +301,8 @@ if( response.data.result[0].BankAccountNo != "")
                  window.location.href= "login/login.html";
     }
   
-    $scope.Save = function(){
 
-      if(($scope.amount != undefined || $scope.amount != "") &&
-         ($scope.method != undefined || $scope.method != "") &&
-         ($scope.remark != undefined || $scope.remark != ""))
-      {
-     
-      var http = localStorage.getItem("serverpath")+"data.php?func=RedeemAmount&UserCode="+localStorage.getItem("Code")+"&amount="+$scope.amount+"&method="+$scope.method+"&remark="+$scope.remark+"";
     
-      $http.get(http).then(function (response) {
-
-        if(response.data.result != "")
-        {
-          alert(response.data.result[0].Msg);
-        } 
-      });
-      }
-
-    }
     
 });
 

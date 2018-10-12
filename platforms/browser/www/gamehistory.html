@@ -224,101 +224,26 @@
                         </div>
                     </div>
                 </nav>
-  <div class="container" style="padding-right: 0px;padding-left: 0px;">
+  <div class="container" style="padding-right: 10px;padding-left: 10px; color: white;">
       
-                <table class="table">
-                    <tr>
-                        <td>
-                           <div class="alert alert-dismissible text-center alert-primary panel-primary panel">
- <!--  <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-  <a href="#" class="alert-link">Total Games Win</a><br> 
-
-       <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                75%</div>
-            </div>  
-</div> 
-
-
-                        </td>
-                        <td>
-                            <div class="alert alert-dismissible alert-primary panel-primary panel">
-<!--   <button type="button" class="close" data-dismiss="alert">&times;</button> -->
- <a href="#" class="alert-link">Total Games Lose</a><br> 
-
-  <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                75%</div>
-            </div>
-</div>
-                        </td>
-
-                    </tr>
-                    
-                         <tr>
-                        <td>
-                           <div class="alert alert-dismissible alert-primary panel-primary panel">
- 
-  <a href="#" class="alert-link">Wallet Amount</a><br> 
-   <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                &#8377; 200</div>
-            </div>
-</div> 
-                        </td>
-                        <td>
-                            <div class="alert alert-dismissible alert-primary panel-primary panel">
- 
- <a href="#" class="alert-link">Next Game in </a> <br> 
-
-  <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                12 min</div>
-            </div>
-</div>
-                        </td>
-
-                    </tr>
-
-<tr>
-  <td colspan="2" class="text-center">
-         
-    <a href="newgame.html" class="text-center">  <img src="img/playnow.png" class="text-center" width="250px">   
-     </a>
-
-  </td>
-</tr>
-                </table>
+              <b>Game History</b>
+              <br><br>
+              <table class="table table-bordered">
+                <tr>
+                  <th>Game Name</th>
+                  <th>Answer</th>
+                  <th>Amount</th>
+                  <th>Win Stat</th>
+                </tr>
+                <tr ng-repeat="x in gamehistory">
+                  <td>{{x.GameName}}</td>
+                  <td>{{x.Answer}}</td>
+                  <td>{{x.Amount}}</td>
+                  <td>{{x.WinStat}}</td>
+                </tr>
+              </table>
       
-  
+          <span class="text-center">{{alert}}</span>
 
      
      </div>
@@ -359,6 +284,16 @@ var today = dd+'-'+mm+'-'+yyyy;
       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
      
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
+
+      q = "select * from vw_GameHistory order by ID desc";
+      http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+      $http.get(http).then(function (response) {
+        $scope.gamehistory = response.data.result; 
+        if($scope.gamehistory.ID == undefined)
+        {
+          $scope.alert = "No Record Found";
+        }
+      });
 
     $scope.Logout = function () {
 
