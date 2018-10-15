@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Add Money</title>
+
+          <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="css/style3.css">
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet" href="css/loader.css">
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+        <style type="text/css">
+        .alert-dismissible {
+     padding-right: 0px;
+     padding-left: 5px;
+     text-align: center;
+}
+            .progress{
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    background: none;
+    margin: 0 auto;
+    box-shadow: none;
+    position: relative;
+}
+.progress:after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 12px solid #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.progress > span{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+.progress .progress-left{
+    left: 0;
+}
+.progress .progress-bar{
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 12px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+}
+.progress .progress-left .progress-bar{
+    left: 100%;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
+}
+.progress .progress-right{
+    right: 0;
+}
+.progress .progress-right .progress-bar{
+    left: -100%;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
+    animation: loading-1 1.8s linear forwards;
+}
+.progress .progress-value{
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background: #44484b;
+    font-size: 24px;
+    color: #fff;
+    line-height: 135px;
+    text-align: center;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.progress.blue .progress-bar{
+    border-color: #049dff;
+}
+.progress.blue .progress-left .progress-bar{
+    animation: loading-2 1.5s linear forwards 1.8s;
+}
+.progress.yellow .progress-bar{
+    border-color: #fdba04;
+}
+.progress.yellow .progress-left .progress-bar{
+    animation: loading-3 1s linear forwards 1.8s;
+}
+.progress.pink .progress-bar{
+    border-color: #ed687c;
+}
+.progress.pink .progress-left .progress-bar{
+    animation: loading-4 0.4s linear forwards 1.8s;
+}
+.progress.green .progress-bar{
+    border-color: #1abc9c;
+}
+.progress.green .progress-left .progress-bar{
+    animation: loading-5 1.2s linear forwards 1.8s;
+}
+@keyframes loading-1{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+@keyframes loading-2{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(144deg);
+        transform: rotate(144deg);
+    }
+}
+@keyframes loading-3{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+@keyframes loading-4{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(36deg);
+        transform: rotate(36deg);
+    }
+}
+@keyframes loading-5{
+    0%{
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100%{
+        -webkit-transform: rotate(126deg);
+        transform: rotate(126deg);
+    }
+}
+@media only screen and (max-width: 990px){
+    .progress{ margin-bottom: 20px; }
+}
+
+        </style>
+    </head>
+    <body>
+
+
+    <div id="loading" class="loader">   
+    </div>
+     <div ng-app="myApp"  ng-controller="HomeCtrl">
+
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+              <div ng-include="'sidebar.html'"></div>
+
+            <!-- Page Content Holder -->
+              <div id="content" style="padding: 0px;background-image: url(http://hdbackgroundspic.com/wp-content/uploads/2018/06/surface-Shadow-Background.jpg);background-repeat: no-repeat; background-size: cover;">
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" 
+                            style="background:rgb(214, 34, 2);">
+                                <i class="glyphicon glyphicon-align-left"></i>
+                             
+                            </button>
+
+                                              <div class="btn-group pull-right" role="group">
+    <button id="btnGroupDrop1" type="button" style="background:rgb(214, 34, 2);" class="glyphicon cl_main_btn glyphicon-bell btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{dateandtime}}</button>
+    <div class="dropdown-menu container" aria-labelledby="btnGroupDrop1">
+        <ul >
+            <li ng-repeat="x in notificationlist" >
+                <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
+            </li>
+      
+           <li>
+               <a href="notifications.html">View All</a>
+           </li>
+        </ul>
+      <br>
+  
+    </div>
+  </div>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                                <li><a href="#">Page</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+  <div class="container" style="padding-right: 10px;padding-left: 10px;">
+      
+   
+
+<fieldset>
+  
+  <div class="form-group" style="color: white;">
+    <label>Current Balance : &#8377; {{currentBalance}}</label>
+  </div>
+  <div class="form-group">
+   
+   <input type="text" name="" placeholder="Amount" ng-model="amount" class="form-control">
+
+  </div>
+  <div class="form-group">
+  
+  <span class="btn btn-block btn-primary" ng-click="Payu()">Recharge Now</span>
+
+  </div>
+</fieldset>
+
+
+  
+
+     <br>
+
+ 
+
+   
+
+
+
+     </div>
+
+            </div>
+        </div>
+
+</div>
+
+        <div class="overlay"></div>
+
+
+        <!-- jQuery CDN -->
+         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+          <script src="js/angular.min.js"></script>
+
+
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('HomeCtrl', function ($scope, $http) {
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+
+var yyyy = today.getFullYear();
+if(dd<10){
+    dd='0'+dd;
+} 
+if(mm<10){
+    mm='0'+mm;
+} 
+var today = dd+'-'+mm+'-'+yyyy;
+
+      $scope.dateandtime = today;
+
+      var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
+      var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+     
+      $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
+
+      $scope.currentBalance = localStorage.getItem("WalletAmount");
+    $scope.Logout = function () {
+
+                localStorage.removeItem("Code");
+                 localStorage.removeItem("Name");
+                 localStorage.removeItem("Email");
+                 window.location.href= "login/login.html";
+    }
+  
+    $scope.Payu = function()
+    {
+      sessionStorage.setItem("payu_amount",$scope.amount);
+      sessionStorage.setItem("uid",localStorage.getItem("Code"));
+      window.location.href = "browser2.html";
+
+    }
+  
+    
+});
+
+</script>
+
+
+        <!-- Bootstrap Js CDN -->
+        <script type="text/javascript" src="js/sc_index.js"></script>
+         <!-- Bootstrap Js CDN -->
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <!-- jQuery Nicescroll CDN -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+
+         <script type="text/javascript">
+             $(document).ready(function () {
+                 $("#sidebar").niceScroll({
+                     cursorcolor: '#53619d',
+                     cursorwidth: 4,
+                     cursorborder: 'none'
+                 });
+
+                 $('#dismiss, .overlay').on('click', function () {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').fadeOut();
+                 });
+
+                 $('#sidebarCollapse').on('click', function () {
+                     $('#sidebar').addClass('active');
+                     $('.overlay').fadeIn();
+                     $('.collapse.in').toggleClass('in');
+                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                 });
+             });
+         </script>
+    </body>
+</html>
