@@ -230,7 +230,7 @@
             <i class="fa fa-3x"></i><br><br>
             &#8377; {{transdetails[0].Amount}}
             <br>
-  {{transdetails[0].Remark}}.
+ {{transdetails[0].Remark}}.
 </div>
      
      </div>
@@ -275,8 +275,7 @@ var today = dd+'-'+mm+'-'+yyyy;
       http = localStorage.getItem("serverpath")+"data.php?func=getLastTransactionDetail&Code="+localStorage.getItem("Code");
     $http.get(http).then(function (response) {
       $scope.transdetails = response.data.result;
-    
-    if($scope.transdetails[0].Status == "Success")
+    if($scope.transdetails[0].Status == "success")
     {
       $(".fa-3x").addClass("fa-check-circle-o"); 
       $(".alert").addClass("alert-success");
