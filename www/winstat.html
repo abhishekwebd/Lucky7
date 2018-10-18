@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Home</title>
+        <title>Collapsible sidebar using Bootstrap 3</title>
 
           <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -171,6 +171,66 @@
 }
 
         </style>
+
+          <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+html, body{
+  height: 100%;
+  font-weight: 800;
+}
+
+body{
+  background: #030321;
+  font-family: Arial;
+}
+
+svg {
+    display: block;
+    font: 10.5em 'Montserrat';
+   /* width: 960px;
+    height: 300px;*/
+    margin: 0 auto;
+}
+
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 5.5s infinite linear;
+}
+
+.text-copy:nth-child(1){
+  stroke: #4D163D;
+  animation-delay: -1;
+}
+
+.text-copy:nth-child(2){
+  stroke: #840037;
+  animation-delay: -2s;
+}
+
+.text-copy:nth-child(3){
+  stroke: #BD0034;
+  animation-delay: -3s;
+}
+
+.text-copy:nth-child(4){
+  stroke: #BD0034;
+  animation-delay: -4s;
+}
+
+.text-copy:nth-child(5){
+  stroke: #FDB731;
+  animation-delay: -5s;
+}
+
+@keyframes stroke-offset{
+  100% {stroke-dashoffset: -35%;}
+}
+  </style>
     </head>
     <body>
 
@@ -203,7 +263,7 @@
             <li ng-repeat="x in notificationlist" >
                 <a class="dropdown-item" ng-click="viewMessageData(x.Code)"> {{ x.Subject }}</a>
             </li>
-     
+            <hr>
            <li>
                <a href="notifications.html">View All</a>
            </li>
@@ -226,101 +286,27 @@
                 </nav>
   <div class="container" style="padding-right: 0px;padding-left: 0px;">
       
-                <table class="table">
-                    <tr>
-                        <td>
-                           <div class="alert alert-dismissible text-center alert-primary panel-primary panel">
- <!--  <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-  <a href="#" class="alert-link">Total Games Win</a><br> 
+               <div id="winDiv" style="margin-left: 5%; margin-right: 5%; text-align: center;">
+                       <svg viewBox="0 0 960 300">
+  <symbol id="s-text">
+    <text text-anchor="middle" x="50%" y="80%">{{WinMsg}}</text>
+  </symbol>
 
-       <div class="progress yellow">
+  <g class = "g-ants">
+    <use xlink:href="#s-text" class="text-copy"></use>
+    <use xlink:href="#s-text" class="text-copy"></use>
+    <use xlink:href="#s-text" class="text-copy"></use>
+    <use xlink:href="#s-text" class="text-copy"></use>
+    <use xlink:href="#s-text" class="text-copy"></use>
+  </g>
+</svg>
 
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                75%</div>
-            </div>  
-</div> 
+<img src="https://vignette.wikia.nocookie.net/clashofclans/images/e/e0/Fireworks-animated.gif/revision/latest?cb=20150101005143" >
+               </div>
 
-
-                        </td>
-                        <td>
-                            <div class="alert alert-dismissible alert-primary panel-primary panel">
-<!--   <button type="button" class="close" data-dismiss="alert">&times;</button> -->
- <a href="#" class="alert-link">Total Games Lose</a><br> 
-
-  <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                75%</div>
-            </div>
-</div>
-                        </td>
-
-                    </tr>
-                    
-                         <tr>
-                        <td>
-                           <div class="alert alert-dismissible alert-primary panel-primary panel">
- 
-  <a href="#" class="alert-link">Wallet Amount</a><br> 
-   <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                &#8377; 200</div>
-            </div>
-</div> 
-                        </td>
-                        <td>
-                            <div class="alert alert-dismissible alert-primary panel-primary panel">
- 
- <a href="#" class="alert-link">Next Game in </a> <br> 
-
-  <div class="progress yellow">
-
-                <span class="progress-left">
-                    <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                    <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">
-                12 min</div>
-            </div>
-</div>
-                        </td>
-
-                    </tr>
-
-<tr>
-  <td colspan="2" class="text-center">
-         
-    <a href="newgame.html" class="text-center">  <img src="img/play-now-button-png-7.png" class="text-center" width="150px">   
-     </a>
-
-  </td>
-</tr>
-                </table>
-
-                
-      
-  
+   <div id="loseDiv" style="margin-left: 5%; margin-right: 5%; text-align: center; " >
+<img src="https://i.gifer.com/IwSW.gif" class="img-responsive">
+   </div>
 
      
      </div>
@@ -357,6 +343,18 @@ var today = dd+'-'+mm+'-'+yyyy;
 
       $scope.dateandtime = today;
 
+var WinCode = sessionStorage.getItem("WinCode");
+if(WinCode == 1){
+$scope.WinMsg = sessionStorage.getItem("WinMsg");
+$("#loseDiv").css("display","none");
+}
+else
+{
+$("#winDiv").css("display","none");
+}
+
+
+
       var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
      
@@ -371,7 +369,7 @@ var today = dd+'-'+mm+'-'+yyyy;
     }
   
 
-  
+    
     
 });
 
