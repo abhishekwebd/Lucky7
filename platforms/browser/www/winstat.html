@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -169,22 +168,18 @@
 @media only screen and (max-width: 990px){
     .progress{ margin-bottom: 20px; }
 }
-
         </style>
 
           <style type="text/css">
     @import url(https://fonts.googleapis.com/css?family=Montserrat);
-
 html, body{
   height: 100%;
-  font-weight: 800;
+ /* font-weight: 800;*/
 }
-
 body{
   background: #030321;
   font-family: Arial;
 }
-
 svg {
     display: block;
     font: 10.5em 'Montserrat';
@@ -192,7 +187,6 @@ svg {
     height: 300px;*/
     margin: 0 auto;
 }
-
 .text-copy {
     fill: none;
     stroke: white;
@@ -201,32 +195,26 @@ svg {
     stroke-dashoffset: 0%;
     animation: stroke-offset 5.5s infinite linear;
 }
-
 .text-copy:nth-child(1){
   stroke: #4D163D;
   animation-delay: -1;
 }
-
 .text-copy:nth-child(2){
   stroke: #840037;
   animation-delay: -2s;
 }
-
 .text-copy:nth-child(3){
   stroke: #BD0034;
   animation-delay: -3s;
 }
-
 .text-copy:nth-child(4){
   stroke: #BD0034;
   animation-delay: -4s;
 }
-
 .text-copy:nth-child(5){
   stroke: #FDB731;
   animation-delay: -5s;
 }
-
 @keyframes stroke-offset{
   100% {stroke-dashoffset: -35%;}
 }
@@ -308,6 +296,12 @@ svg {
 <img src="https://i.gifer.com/IwSW.gif" class="img-responsive">
    </div>
 
+<br><br>
+
+  <div class="text-center">
+     <a href="index2.html" class="btn btn-primary"> <i class="fa fa-home fa-2x "> Go Home</i> </a>
+  </div>
+
      
      </div>
 
@@ -331,7 +325,6 @@ svg {
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
-
 var yyyy = today.getFullYear();
 if(dd<10){
     dd='0'+dd;
@@ -340,9 +333,7 @@ if(mm<10){
     mm='0'+mm;
 } 
 var today = dd+'-'+mm+'-'+yyyy;
-
       $scope.dateandtime = today;
-
 var WinCode = sessionStorage.getItem("WinCode");
 if(WinCode == 1){
 $scope.WinMsg = sessionStorage.getItem("WinMsg");
@@ -352,27 +343,20 @@ else
 {
 $("#winDiv").css("display","none");
 }
-
-
-
       var q = "select top 10 Code,Subject from TblNotification where UserCode = "+localStorage.getItem("Code")+" and IsDeactive = 0 and IsDelete = 0 order by Code desc";
       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
      
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
-
     $scope.Logout = function () {
-
                 localStorage.removeItem("Code");
                  localStorage.removeItem("Name");
                  localStorage.removeItem("Email");
                  window.location.href= "login/login.html";
     }
   
-
     
     
 });
-
 </script>
         <!-- Bootstrap Js CDN -->
         <script type="text/javascript" src="js/sc_index.js"></script>
@@ -388,12 +372,10 @@ $("#winDiv").css("display","none");
                      cursorwidth: 4,
                      cursorborder: 'none'
                  });
-
                  $('#dismiss, .overlay').on('click', function () {
                     $('#sidebar').removeClass('active');
                     $('.overlay').fadeOut();
                  });
-
                  $('#sidebarCollapse').on('click', function () {
                      $('#sidebar').addClass('active');
                      $('.overlay').fadeIn();

@@ -106,9 +106,6 @@
     <tr style="display: none;" id="giftr">
         <td colspan="3" class="text-center">
 
-            <input type="hidden" name="" ng-model="gameid" ng-bind="gameid">
-            <input type="hidden" name="" ng-model="timefrom" ng-bind="timefrom">
-            <input type="hidden" name="" ng-model="timeto" ng-bind="timeto">
             <img src="img/ludogif.gif" width="150px">
 
         </td>
@@ -164,29 +161,18 @@ $http.get(http).then(function (response) {
   localStorage.setItem("WalletAmount",response.data.result[0].Amount);
 });
 
-$http.get(localStorage.getItem("serverpath")+"data.php?func=getNewGame").then(function (response) 
-{
-    if(response.data.result == undefined || response.data.result == "")
-    {
-        alert("No Game Found");
-        window.location.href = "index2.html";
-    }
-    else
-    {
-        $scope.gameid = response.data.result[0].Code;
-        $scope.timefrom = response.data.result[0].TimeFrom;
-        $scope.timeto = response.data.result[0].TimeTo;
-        $scope.Gamename = response.data.result[0].GameName;
-    }
-
-
+q = "exec sp_Games";
+http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+$http.get(http).then(function (response) { 
 });
+
+  $scope.Gamename = "Click Lucky 7 ";
 
   window.setTimeout(function(){
 
     $("#alertrow").css("display","none");
 
-    }, 10000);
+    }, 5000);
        
 
 $scope.Logout = function () {
@@ -199,7 +185,7 @@ $scope.Logout = function () {
 
 $scope.submit_Click = function(ans){
 
-    if($scope.amount < parseInt(localStorage.getItem("WalletAmount")))
+    if($scope.amount <= parseInt(localStorage.getItem("WalletAmount")))
     {
         var snd = new Audio("audio/1.wav");
         snd.play();
@@ -211,19 +197,17 @@ $scope.submit_Click = function(ans){
    // alert($scope.gameid);
 
 
-   q = "func=SubmitGame&UserCode="+localStorage.getItem("Code")+"&GameCode="+$scope.gameid+"&Answer="+ans+"&Amount="+$scope.amount;
+   q = "func=SubmitGame&UserCode="+localStorage.getItem("Code")+"&Answer="+ans+"&Amount="+$scope.amount;
    var http = localStorage.getItem("serverpath")+"data.php?"+q;
 
    $http.get(http).then(function (response) {
         //$scope.result = response.data.result;
-        if(response.data.result[0].Code == 1 || response.data.result[0].Code == 2)
+         if(response.data.result[0].Code == 1 || response.data.result[0].Code == 2)
         {
          sessionStorage.setItem("WinCode",response.data.result[0].Code);
          sessionStorage.setItem("WinMsg",response.data.result[0].Msg);
           window.setTimeout(function(){
-
     window.location.href = "winstat.html"; 
-
     }, 10000);
              
      }
@@ -232,6 +216,7 @@ $scope.submit_Click = function(ans){
          alert(response.data.result[0].Msg);
            window.location.href = "index2.html";
      }
+     
  });
 }
 else

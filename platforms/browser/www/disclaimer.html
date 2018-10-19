@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>Splash Screen Template</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1,  minimum-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="common/css/app.min.css">
+   <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="common/js/jQuery2.0.2.min.js"></script>
+<script src="common/js/main.min.js"></script>
+<script type="text/javascript">
+     
+ 	if(localStorage.getItem("Isskipped") == "yes")
+ 	{
+		window.location.href = "login/login.html";
+ 	}
+
+</script>
+</head>
+
+<body style="background: url(img/background.png);background-size: cover; color: white;">
+
+<div style="margin:10%;">
+<h2>Disclaimer</h2>
+<blockquote class="blockquote">
+  <p class="mb-0">A disclaimer is generally any statement intended to specify or delimit the scope of rights and obligations that may be exercised and enforced by parties in a legally recognized relationship</p>
+  <footer class="blockquote-footer pull-right" onclick="skip()" style="color: white;" >Skip</footer>
+</blockquote>
+	
+</div>
+
+<script type="text/javascript">
+	function skip()
+	{
+		localStorage.setItem("Isskipped","yes");
+		window.location.href = "login/login.html";
+	}
+</script>
+
+</body>
+</html>

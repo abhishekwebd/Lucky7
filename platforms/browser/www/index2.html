@@ -242,7 +242,7 @@
                     <span class="progress-bar"></span>
                 </span>
                 <div class="progress-value">
-                75%</div>
+                {{TotalGamesWin}}</div>
             </div>  
 </div> 
 
@@ -262,7 +262,7 @@
                     <span class="progress-bar"></span>
                 </span>
                 <div class="progress-value">
-                75%</div>
+                {{TotalGamesLose}}</div>
             </div>
 </div>
                         </td>
@@ -283,16 +283,16 @@
                     <span class="progress-bar"></span>
                 </span>
                 <div class="progress-value">
-                &#8377; 200</div>
+                &#8377; {{WalletAmount}}</div>
             </div>
 </div> 
                         </td>
                         <td>
                             <div class="alert alert-dismissible alert-primary panel-primary panel">
  
- <a href="#" class="alert-link">Next Game in </a> <br> 
+<br>
 
-  <div class="progress yellow">
+  <div class="progress yellow" ng-click="PlayNow()">
 
                 <span class="progress-left">
                     <span class="progress-bar"></span>
@@ -300,8 +300,8 @@
                 <span class="progress-right">
                     <span class="progress-bar"></span>
                 </span>
-                <div class="progress-value">
-                12 min</div>
+                <div class="progress-value" >
+                Play Now</div>
             </div>
 </div>
                         </td>
@@ -362,6 +362,18 @@ var today = dd+'-'+mm+'-'+yyyy;
      
       $http.get(http).then(function (response) {$scope.notificationlist = response.data.result; });
 
+      $scope.WalletAmount = localStorage.getItem("WalletAmount");
+
+      q = "select count(ID) as WinCount from TblGameUsers where WinStat = 'Win' and UserCode = "+localStorage.getItem("Code");
+       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+     
+      $http.get(http).then(function (response) { $scope.TotalGamesWin  = response.data.result[0].WinCount; });
+
+  q = "select count(ID) as LoseCount from TblGameUsers where WinStat = 'Lose' and UserCode = "+localStorage.getItem("Code");
+       var http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+     
+      $http.get(http).then(function (response) { $scope.TotalGamesLose  = response.data.result[0].LoseCount; });
+     
     $scope.Logout = function () {
 
                 localStorage.removeItem("Code");
@@ -371,7 +383,9 @@ var today = dd+'-'+mm+'-'+yyyy;
     }
   
 
-  
+  $scope.PlayNow = function(){
+    window.location.href = "newgame.html";
+  }
     
 });
 

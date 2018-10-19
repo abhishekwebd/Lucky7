@@ -289,7 +289,7 @@ var today = dd+'-'+mm+'-'+yyyy;
       http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
       $http.get(http).then(function (response) {
         $scope.gamehistory = response.data.result; 
-        if($scope.gamehistory.ID == undefined)
+        if($scope.gamehistory == undefined)
         {
           $scope.alert = "No Record Found";
         }
