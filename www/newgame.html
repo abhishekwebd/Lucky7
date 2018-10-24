@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 3</title>
+    <title>New Game</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -28,7 +28,7 @@
             <div ng-include="'sidebar.html'"></div>
 
             <!-- Page Content Holder -->
-            <div id="content" style="padding: 0px;background-image: url(http://hdbackgroundspic.com/wp-content/uploads/2018/06/surface-Shadow-Background.jpg);background-repeat: no-repeat; background-size: cover;">
+            <div id="content" style="padding: 0px;background-image: url(https://cdn.allwallpaper.in/wallpapers/1920x1080/3482/video-games-braid-video-game-1920x1080-wallpaper.jpg);background-repeat: no-repeat; background-size: cover;">
 
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
@@ -69,6 +69,25 @@
             </div>
         </nav>
         <div class="container">
+
+          <div class="alert alert-dismissible alert-secondary" style="font-size: small;">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>{{Question}}</strong>
+  <table class="table">
+    <tr>
+      <td>1. {{Opt1}}</td>
+      <td>2. {{Opt2}}</td>
+    </tr>
+
+    <tr>
+      <td>3. {{Opt3}}</td>
+      <td>4. {{Opt4}}</td>
+    </tr>
+
+  </table>
+</div>
+
+
             <div class="text-center">
                 <b style="color: white;">{{Gamename}}</b>
             </div>
@@ -164,6 +183,16 @@ $http.get(http).then(function (response) {
 q = "exec sp_Games";
 http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
 $http.get(http).then(function (response) { 
+});
+
+q = "select top 1 * from tblquestions";
+http = localStorage.getItem("serverpath")+"data.php?func=execute&q="+q;
+$http.get(http).then(function (response) { 
+  $scope.Question = response.data.result[0].Question;
+  $scope.Opt1 = response.data.result[0].Opt1;
+  $scope.Opt2 = response.data.result[0].Opt2;
+  $scope.Opt3 = response.data.result[0].Opt3;
+  $scope.Opt4 = response.data.result[0].Opt4;
 });
 
   $scope.Gamename = "Click Lucky 7 ";
